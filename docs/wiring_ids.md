@@ -32,6 +32,48 @@ This document maps every interactive UI element to its corresponding API endpoin
 | `btn-home-action-4` | `/api/system/settings` (planned) | `system_settings.*` | Configure application |
 | `btn-home-action-5` | `/api/recognitions/center` (planned) | `recognitions.*` | Award achievements center |
 
+### Admin Create Section - Nested Content Creation Interface (Accessed via Sidebar)
+| UI Element ID | API Endpoint | Database Field | Notes |
+|---------------|--------------|----------------|-------|
+| `create-tabs` | N/A | N/A | Nested tab system container for content creation |
+
+#### Create Training Sub-Tab
+| UI Element ID | API Endpoint | Database Field | Notes |
+|---------------|--------------|----------------|-------|
+| `btn-create-course` | `/api/training/courses` (POST, planned) | `training_courses.*` | Create new training course |
+| `btn-create-program` | `/api/training/programs` (POST, planned) | `training_programs.*` | Create training program |
+| `btn-import-content` | `/api/training/import` (POST, planned) | `training_content.*` | Import external training content |
+| `course-title` | N/A | `courses.title` | Course title input field |
+| `course-description` | N/A | `courses.description` | Course description textarea |
+| `btn-publish-course` | `/api/training/courses/publish` (POST, planned) | `training_courses.*` | Publish created course |
+
+#### Create Routines Sub-Tab
+| UI Element ID | API Endpoint | Database Field | Notes |
+|---------------|--------------|----------------|-------|
+| `btn-create-routine` | `/api/routines` (POST, planned) | `routines.*` | Create new routine |
+| `btn-create-template` | `/api/routines/templates` (POST, planned) | `routine_templates.*` | Create routine template |
+| `btn-create-workflow` | `/api/workflows` (POST, planned) | `workflows.*` | Create automation workflow |
+| `routine-name` | N/A | `routines.name` | Routine name input field |
+| `btn-activate-routine` | `/api/routines/activate` (POST, planned) | `routines.*` | Activate created routine |
+
+#### Create Recognition Sub-Tab
+| UI Element ID | API Endpoint | Database Field | Notes |
+|---------------|--------------|----------------|-------|
+| `btn-create-award` | `/api/recognitions/awards` (POST, planned) | `awards.*` | Create new award |
+| `btn-create-badge` | `/api/recognitions/badges` (POST, planned) | `badges.*` | Create digital badge |
+| `btn-create-certificate` | `/api/recognitions/certificates` (POST, planned) | `certificates.*` | Create certificate template |
+| `award-title` | N/A | `awards.title` | Award title input field |
+| `btn-publish-award` | `/api/recognitions/awards/publish` (POST, planned) | `awards.*` | Publish created award |
+
+#### Create Resources Sub-Tab
+| UI Element ID | API Endpoint | Database Field | Notes |
+|---------------|--------------|----------------|-------|
+| `btn-create-document` | `/api/resources/documents` (POST, planned) | `resources.*` | Create new document |
+| `btn-upload-resource` | `/api/resources/upload` (POST, planned) | `resources.*` | Upload resource files |
+| `btn-create-library` | `/api/resources/libraries` (POST, planned) | `resource_libraries.*` | Create resource library |
+| `resource-title` | N/A | `resources.title` | Resource title input field |
+| `btn-publish-resource` | `/api/resources/publish` (POST, planned) | `resources.*` | Publish created resource |
+
 ### Training Tab Actions
 | UI Element ID | API Endpoint | Database Field | Notes |
 |---------------|--------------|----------------|-------|
@@ -114,6 +156,7 @@ This document maps every interactive UI element to its corresponding API endpoin
 |---------------|--------------|----------------|-------|
 | `sidebar-overview` | `/api/dashboard/stats` | Multiple tables | Dashboard overview |
 | `sidebar-analytics` | `/api/analytics` (planned) | `analytics.*` | Analytics data |
+| `sidebar-create` | N/A | N/A | **Content Creation Center** with nested admin interface |
 | `sidebar-users` | `/api/users` | `users.*` | User management |
 | `sidebar-projects` | `/api/projects` | `projects.*` | Project management |
 | `sidebar-settings` | `/api/settings` (planned) | `settings.*` | System settings |

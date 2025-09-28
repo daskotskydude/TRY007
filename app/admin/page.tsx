@@ -9,27 +9,51 @@ import Sidebar from '../../components/Sidebar';
 import Button from '../../components/Button';
 import Card, { StatsCard } from '../../components/Card';
 import { useToast } from '../../components/Toast';
+import { CreateAdmin } from '../../components/CreateAdmin';
 
 export default function AdminPage() {
   const { toasts, addToast } = useToast();
+
+  const [currentSection, setCurrentSection] = React.useState('overview');
 
   const sidebarSections = [
     {
       title: 'Dashboard',
       items: [
-        { id: 'overview', label: 'Overview', href: '/admin', active: true },
-        { id: 'analytics', label: 'Analytics', href: '/admin/analytics' },
+        { id: 'overview', label: 'Overview', href: '/admin', active: currentSection === 'overview' },
+        { id: 'analytics', label: 'Analytics', href: '/admin/analytics', active: currentSection === 'analytics' },
+      ]
+    },
+    {
+      title: 'Content Creation',
+      items: [
+        { id: 'create', label: 'Create Content', href: '#', active: currentSection === 'create' },
       ]
     },
     {
       title: 'Management',
       items: [
-        { id: 'users', label: 'Users', href: '/admin/users' },
-        { id: 'projects', label: 'Projects', href: '/admin/projects' },
-        { id: 'settings', label: 'Settings', href: '/admin/settings' },
+        { id: 'users', label: 'Users', href: '/admin/users', active: currentSection === 'users' },
+        { id: 'projects', label: 'Projects', href: '/admin/projects', active: currentSection === 'projects' },
+        { id: 'settings', label: 'Settings', href: '/admin/settings', active: currentSection === 'settings' },
       ]
     }
   ];
+
+  const handleSectionChange = (sectionId: string) => {
+    setCurrentSection(sectionId);
+    if (sectionId === 'create') {
+      addToast({
+        message: 'Switched to Content Creation Center',
+        variant: 'info'
+      });
+    } else {
+      addToast({
+        message: `${sectionId} feature is not available yet`,
+        variant: 'info'
+      });
+    }
+  };
 
   // Admin notifications (more system-focused)
   const adminNotifications = [
@@ -103,11 +127,11 @@ export default function AdminPage() {
   ];
 
   const handleSidebarClick = (item: any) => {
-    addToast({
-      title: 'Navigation',
-      message: `${item.label} feature is not available yet`,
-      variant: 'info'
-    });
+    if (item.id === 'create') {
+      handleSectionChange('create');
+    } else {
+      handleSectionChange(item.id);
+    }
   };
 
   const handleQuickAction = (action: string) => {
@@ -173,15 +197,21 @@ export default function AdminPage() {
         />
 
         <main className="layout-admin-content">
-          {/* Dashboard Header */}
-          <div style={{ marginBottom: 'var(--spacing-2xl)' }}>
-            <h1 className="text-3xl font-bold" style={{ marginBottom: 'var(--spacing-sm)' }}>
-              Dashboard Overview
-            </h1>
-            <p className="text-secondary">
-              Welcome to your admin dashboard. Monitor key metrics and manage your application.
-            </p>
-          </div>
+          {currentSection === 'create' ? (
+            <CreateAdmin
+              onShowToast={(message, type) => addToast({ message, variant: type })}
+            />
+          ) : (
+            <>
+              {/* Dashboard Header */}
+              <div style={{ marginBottom: 'var(--spacing-2xl)' }}>
+                <h1 className="text-3xl font-bold" style={{ marginBottom: 'var(--spacing-sm)' }}>
+                  Dashboard Overview
+                </h1>
+                <p className="text-secondary">
+                  Welcome to your admin dashboard. Monitor key metrics and manage your application.
+                </p>
+              </div>
 
           {/* Key Metrics */}
           <div style={{ 
@@ -289,6 +319,8 @@ export default function AdminPage() {
               </div>
             </div>
           </Card>
+            </>
+          )}
         </main>
       </div>
 

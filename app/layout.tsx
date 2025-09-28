@@ -9,6 +9,7 @@ import '../styles/components/notification-bell.css';
 import '../styles/components/profile-dropdown.css';
 import '../styles/components/tabs.css';
 import '../styles/components/home.css';
+import '../styles/components/create-admin.css';
 
 export default function RootLayout({
   children,

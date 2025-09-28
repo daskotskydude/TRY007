@@ -1,8 +1,4 @@
 {
-<<<<<<< HEAD
-  "/admin/page": "app/admin/page.js"
-=======
   "/admin/page": "app/admin/page.js",
   "/page": "app/page.js"
->>>>>>> 45ea9b083d167365b13824b153f4ecdebabe5b7d
 }
