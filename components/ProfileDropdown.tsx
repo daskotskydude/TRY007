@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { User, ChevronDown, Settings, LogOut, Shield, Bell } from 'lucide-react';
 
 export interface ProfileDropdownItem {
   id: string;
   label: string;
   href?: string;
-  icon?: string;
+  icon?: string | React.ReactNode;
   onClick?: () => void;
   separator?: boolean;
   variant?: 'default' | 'danger';
@@ -85,7 +86,7 @@ export default function ProfileDropdown({
           {user.avatar ? (
             <img src={user.avatar} alt={user.name} />
           ) : (
-            getInitials(user.name)
+            <User size={20} className="profile-avatar-icon" />
           )}
         </div>
         
@@ -94,7 +95,7 @@ export default function ProfileDropdown({
           {user.role && <span className="profile-role">{user.role}</span>}
         </div>
         
-        <span className="profile-chevron">▼</span>
+        <ChevronDown size={16} className="profile-chevron" />
       </button>
 
       {isOpen && (

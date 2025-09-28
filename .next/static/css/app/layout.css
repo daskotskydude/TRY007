@@ -132,14 +132,14 @@ body {
 
 .layout-content {
   flex: 1 1;
-  padding-top: 4rem; /* Account for fixed navbar */
+  padding-top: 8rem; /* Account for fixed navbar + tabs */
 }
 
 /* Admin Layout with Sidebar */
 .layout-admin {
   display: flex;
   min-height: 100vh;
-  padding-top: 4rem; /* Account for fixed navbar */
+  padding-top: 4rem; /* Account for fixed navbar (admin doesn't have tabs) */
 }
 
 .layout-admin-content {
@@ -482,6 +482,49 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
+/*!************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[12].oneOf[12].use[3]!./styles/components/logo.css ***!
+  \************************************************************************************************************************************************************************************************************************************************************************/
+/* Logo Component Styles */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  text-decoration: none;
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-xl);
+  transition: opacity 0.2s ease;
+}
+
+.logo:hover {
+  opacity: 0.8;
+}
+
+.logo-icon {
+  width: 2rem;
+  height: 2rem;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-sm);
+}
+
+.logo-text {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+
+@media (max-width: 640px) {
+  .logo-text {
+    display: none;
+  }
+}
 /*!*************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[12].oneOf[12].use[3]!./styles/components/toast.css ***!
   \*************************************************************************************************************************************************************************************************************************************************************************/
@@ -592,47 +635,171 @@ body {
     max-width: none;
   }
 }
-/*!************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[12].oneOf[12].use[3]!./styles/components/logo.css ***!
-  \************************************************************************************************************************************************************************************************************************************************************************/
-/* Logo Component Styles */
-.logo {
+/*!************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[12].oneOf[12].use[3]!./styles/components/profile-dropdown.css ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************/
+/* Profile Dropdown Component Styles */
+.profile-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-xs);
+  border-radius: var(--border-radius-lg);
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  text-decoration: none;
-  color: var(--color-primary);
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-xl);
-  transition: opacity 0.2s ease;
 }
 
-.logo:hover {
-  opacity: 0.8;
+.profile-button:hover {
+  background-color: var(--color-gray-100);
 }
 
-.logo-icon {
+.profile-avatar {
   width: 2rem;
   height: 2rem;
+  border-radius: 50%;
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-  border-radius: var(--border-radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--color-white);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-sm);
+  overflow: hidden;
 }
 
-.logo-text {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-primary);
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-avatar-icon {
+  color: var(--color-text-secondary);
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.profile-name {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  line-height: 1.2;
+}
+
+.profile-role {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  line-height: 1.2;
+}
+
+.profile-chevron {
+  width: 1rem;
+  height: 1rem;
+  color: var(--color-text-muted);
+  transition: transform 0.2s ease;
+}
+
+.profile-dropdown-open .profile-chevron {
+  transform: rotate(180deg);
+}
+
+.profile-dropdown-menu {
+  position: absolute;
+  top: calc(100% + var(--spacing-xs));
+  right: 0;
+  width: 12rem;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-xl);
+  z-index: var(--z-modal);
+  animation: dropdownSlideIn 0.2s ease;
+}
+
+.profile-dropdown-header {
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.profile-dropdown-name {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.profile-dropdown-email {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.profile-dropdown-nav {
+  list-style: none;
+  padding: var(--spacing-sm) 0;
+}
+
+.profile-dropdown-item {
+  margin: 0;
+}
+
+.profile-dropdown-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  transition: all 0.2s ease;
+}
+
+.profile-dropdown-link:hover {
+  background-color: var(--color-gray-50);
+  color: var(--color-text-primary);
+}
+
+.profile-dropdown-icon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+.profile-dropdown-separator {
+  height: 1px;
+  background-color: var(--color-border);
+  margin: var(--spacing-sm) 0;
+}
+
+.profile-dropdown-logout {
+  color: #ef4444;
+}
+
+.profile-dropdown-logout:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
 }
 
 @media (max-width: 640px) {
-  .logo-text {
+  .profile-info {
     display: none;
+  }
+  
+  .profile-dropdown-menu {
+    width: 10rem;
   }
 }
 /*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
@@ -797,166 +964,353 @@ body {
     transform: translateY(0);
   }
 }
-/*!************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[12].oneOf[12].use[3]!./styles/components/profile-dropdown.css ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************/
-/* Profile Dropdown Component Styles */
-.profile-dropdown {
-  position: relative;
-  display: inline-block;
+/*!************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[12].oneOf[12].use[3]!./styles/components/home.css ***!
+  \************************************************************************************************************************************************************************************************************************************************************************/
+/* Home Landing Styles */
+.home-landing {
+  padding: var(--spacing-md);
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.profile-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: var(--spacing-xs);
+/* Hero Section */
+.home-hero {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   border-radius: var(--border-radius-lg);
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+  color: white;
+  text-align: center;
 }
 
-.profile-button:hover {
-  background-color: var(--color-gray-100);
-}
-
-.profile-avatar {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-white);
-  font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-sm);
-  overflow: hidden;
-}
-
-.profile-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-.profile-info {
+.home-hero-content {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
+  align-items: center;
+  gap: var(--spacing-md);
 }
 
-.profile-name {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+.home-hero-icon {
+  opacity: 0.9;
+}
+
+.home-hero-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  margin: 0;
+}
+
+.home-hero-description {
+  font-size: var(--font-size-lg);
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Stats Section */
+.home-stats-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.home-section-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
-  line-height: 1.2;
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
 }
 
-.profile-role {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-muted);
-  line-height: 1.2;
+.home-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: var(--spacing-lg);
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
 }
 
-.profile-chevron {
-  width: 1rem;
-  height: 1rem;
-  color: var(--color-text-muted);
-  transition: transform 0.2s ease;
+.home-stat-card {
+  text-align: center;
+  position: relative;
 }
 
-.profile-dropdown-open .profile-chevron {
-  transform: rotate(180deg);
+.home-stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
 }
 
-.profile-dropdown-menu {
-  position: absolute;
-  top: calc(100% + var(--spacing-xs));
-  right: 0;
-  width: 12rem;
-  background-color: var(--color-white);
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-xl);
-  z-index: var(--z-modal);
-  animation: dropdownSlideIn 0.2s ease;
+.home-stat-icon {
+  color: var(--color-primary);
 }
 
-.profile-dropdown-header {
-  padding: var(--spacing-md);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.profile-dropdown-name {
+.home-stat-trend {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
+  color: var(--color-success);
+  background-color: var(--color-success-light);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-full);
+}
+
+.home-stat-value {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
   margin-bottom: var(--spacing-xs);
 }
 
-.profile-dropdown-email {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-muted);
+.home-stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
 }
 
-.profile-dropdown-nav {
-  list-style: none;
-  padding: var(--spacing-sm) 0;
+/* Actions Section */
+.home-actions-section {
+  margin-bottom: var(--spacing-xl);
 }
 
-.profile-dropdown-item {
-  margin: 0;
+.home-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-gap: var(--spacing-lg);
+  gap: var(--spacing-lg);
 }
 
-.profile-dropdown-link {
+.home-action-card {
+  text-align: center;
+  padding: var(--spacing-lg);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.home-action-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.home-action-icon {
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.home-action-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.home-action-description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.5;
+}
+
+.home-action-button {
+  width: 100%;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .home-landing {
+    padding: var(--spacing-sm);
+  }
+
+  .home-hero {
+    padding: var(--spacing-lg);
+  }
+
+  .home-hero-title {
+    font-size: var(--font-size-xl);
+  }
+
+  .home-hero-description {
+    font-size: var(--font-size-base);
+  }
+
+  .home-stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-md);
+  }
+
+  .home-actions-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .home-action-card {
+    padding: var(--spacing-md);
+  }
+}
+/*!************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[12].oneOf[12].use[3]!./styles/components/tabs.css ***!
+  \************************************************************************************************************************************************************************************************************************************************************************/
+/* Tab System Styles */
+.tab-system {
+  width: 100%;
+}
+
+.tab-navigation {
+  display: flex;
+  border-bottom: 2px solid var(--color-border);
+  background-color: var(--color-white);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.tab-navigation::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease;
+  white-space: nowrap;
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  padding: var(--spacing-sm) var(--spacing-md);
-  color: var(--color-text-secondary);
-  text-decoration: none;
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  transition: all 0.2s ease;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
 }
 
-.profile-dropdown-link:hover {
+.tab-button:hover {
+  color: var(--color-primary);
   background-color: var(--color-gray-50);
+}
+
+.tab-button-active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+  background-color: var(--color-white);
+}
+
+.tab-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.tab-content {
+  padding: var(--spacing-2xl) 0;
+  min-height: 60vh;
+}
+
+.tab-panel {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.tab-panel-active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Landing Page Styles */
+.landing-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+.landing-hero {
+  text-align: center;
+  padding: var(--spacing-4xl) 0;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: var(--color-white);
+  border-radius: var(--border-radius-xl);
+  margin-bottom: var(--spacing-3xl);
+}
+
+.landing-hero-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing-lg);
+  color: white;
+  opacity: 0.9;
+}
+
+.landing-hero h1 {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--spacing-md);
+}
+
+.landing-hero p {
+  font-size: var(--font-size-lg);
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.landing-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: var(--spacing-2xl);
+  gap: var(--spacing-2xl);
+  margin-bottom: var(--spacing-3xl);
+}
+
+.landing-cta {
+  text-align: center;
+  padding: var(--spacing-3xl) 0;
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius-xl);
+}
+
+.landing-cta h2 {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--spacing-md);
   color: var(--color-text-primary);
 }
 
-.profile-dropdown-icon {
-  width: 1rem;
-  height: 1rem;
-  flex-shrink: 0;
+.landing-cta p {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-lg);
 }
 
-.profile-dropdown-separator {
-  height: 1px;
-  background-color: var(--color-border);
-  margin: var(--spacing-sm) 0;
+.cta-buttons {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.profile-dropdown-logout {
-  color: #ef4444;
-}
-
-.profile-dropdown-logout:hover {
-  background-color: rgba(239, 68, 68, 0.1);
-  color: #dc2626;
-}
-
-@media (max-width: 640px) {
-  .profile-info {
-    display: none;
+@media (max-width: 768px) {
+  .landing-hero h1 {
+    font-size: var(--font-size-3xl);
   }
   
-  .profile-dropdown-menu {
-    width: 10rem;
+  .landing-hero p {
+    font-size: var(--font-size-md);
+  }
+  
+  .landing-features {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
   }
 }

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Bell, X, Check, CheckCheck } from 'lucide-react';
 
 export interface Notification {
   id: string;
@@ -45,13 +46,13 @@ export default function NotificationBell({
   const getNotificationIcon = (type?: string) => {
     switch (type) {
       case 'success':
-        return '✓';
+        return <Check size={16} />;
       case 'error':
-        return '✕';
+        return <X size={16} />;
       case 'warning':
-        return '⚠';
+        return <Bell size={16} />;
       default:
-        return 'ℹ';
+        return <Bell size={16} />;
     }
   };
 
@@ -76,7 +77,7 @@ export default function NotificationBell({
         onClick={() => setIsOpen(!isOpen)}
         aria-label={`Notifications ${unreadCount > 0 ? `(${unreadCount} unread)` : ''}`}
       >
-        <span className="notification-icon">🔔</span>
+                <Bell size={20} className="notification-bell-icon" />
         {unreadCount > 0 && (
           <span className="notification-badge">
             {unreadCount > 9 ? '9+' : unreadCount}

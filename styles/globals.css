@@ -9,14 +9,14 @@
 
 .layout-content {
   flex: 1;
-  padding-top: 4rem; /* Account for fixed navbar */
+  padding-top: 8rem; /* Account for fixed navbar + tabs */
 }
 
 /* Admin Layout with Sidebar */
 .layout-admin {
   display: flex;
   min-height: 100vh;
-  padding-top: 4rem; /* Account for fixed navbar */
+  padding-top: 4rem; /* Account for fixed navbar (admin doesn't have tabs) */
 }
 
 .layout-admin-content {
