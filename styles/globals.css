@@ -1,0 +1,33 @@
+@import './tokens.css';
+
+/* Global Layout */
+.layout-main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-content {
+  flex: 1;
+  padding-top: 4rem; /* Account for fixed navbar */
+}
+
+/* Admin Layout with Sidebar */
+.layout-admin {
+  display: flex;
+  min-height: 100vh;
+  padding-top: 4rem; /* Account for fixed navbar */
+}
+
+.layout-admin-content {
+  flex: 1;
+  margin-left: 16rem; /* Account for fixed sidebar */
+  padding: var(--spacing-lg);
+}
+
+@media (max-width: 768px) {
+  .layout-admin-content {
+    margin-left: 0;
+    padding: var(--spacing-md);
+  }
+}
