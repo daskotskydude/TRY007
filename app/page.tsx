@@ -2,12 +2,80 @@
 
 import React from 'react';
 import Navbar from '../components/Navbar';
+import Logo from '../components/Logo';
+import NotificationBell from '../components/NotificationBell';
+import ProfileDropdown from '../components/ProfileDropdown';
 import Button from '../components/Button';
 import Card, { StatsCard } from '../components/Card';
 import { useToast } from '../components/Toast';
 
 export default function HomePage() {
   const { toasts, addToast } = useToast();
+
+  // Mock notifications
+  const mockNotifications = [
+    {
+      id: 'notif-1',
+      title: 'Welcome to TRY007!',
+      message: 'Your account has been successfully created',
+      time: new Date(Date.now() - 5 * 60000).toISOString(),
+      isRead: false,
+      type: 'success' as const
+    },
+    {
+      id: 'notif-2',
+      title: 'System Update',
+      message: 'New features have been added to the admin dashboard',
+      time: new Date(Date.now() - 30 * 60000).toISOString(),
+      isRead: false,
+      type: 'info' as const
+    },
+    {
+      id: 'notif-3',
+      title: 'Maintenance Scheduled',
+      message: 'System maintenance will occur tomorrow at 2 AM',
+      time: new Date(Date.now() - 2 * 60 * 60000).toISOString(),
+      isRead: true,
+      type: 'warning' as const
+    }
+  ];
+
+  // Mock user profile
+  const mockUser = {
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+    role: 'User'
+  };
+
+  // Profile menu items
+  const profileMenuItems = [
+    {
+      id: 'profile',
+      label: 'Profile Settings',
+      icon: '👤',
+      onClick: () => addToast({ message: 'Profile feature is not available yet', variant: 'info' })
+    },
+    {
+      id: 'preferences',
+      label: 'Preferences',
+      icon: '⚙️',
+      onClick: () => addToast({ message: 'Preferences feature is not available yet', variant: 'info' })
+    },
+    {
+      id: 'help',
+      label: 'Help & Support',
+      icon: '❓',
+      onClick: () => addToast({ message: 'Help feature is not available yet', variant: 'info' })
+    },
+    {
+      id: 'logout',
+      label: 'Sign Out',
+      icon: '🚪',
+      separator: true,
+      variant: 'danger' as const,
+      onClick: () => addToast({ message: 'Sign out feature is not available yet', variant: 'info' })
+    }
+  ];
 
   const handleGetStarted = () => {
     addToast({
@@ -25,13 +93,26 @@ export default function HomePage() {
     });
   };
 
+  const handleNotificationClick = (notification: any) => {
+    addToast({
+      title: 'Notification Clicked',
+      message: `Opened: ${notification.title}`,
+      variant: 'info'
+    });
+  };
+
+  const handleMarkAllRead = () => {
+    addToast({
+      message: 'All notifications marked as read',
+      variant: 'success'
+    });
+  };
+
   return (
     <div className="layout-main">
       <Navbar
         left={
-          <a href="/" className="navbar-logo" id="nav-logo">
-            TRY007
-          </a>
+          <Logo id="nav-logo" />
         }
         center={
           <div className="navbar-tabs">
@@ -44,17 +125,19 @@ export default function HomePage() {
           </div>
         }
         right={
-          <Button
-            id="nav-login-btn"
-            variant="secondary"
-            size="sm"
-            onClick={() => addToast({
-              message: 'This feature is not available yet',
-              variant: 'info'
-            })}
-          >
-            Login
-          </Button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)' }}>
+            <NotificationBell
+              id="nav-notifications"
+              notifications={mockNotifications}
+              onNotificationClick={handleNotificationClick}
+              onMarkAllRead={handleMarkAllRead}
+            />
+            <ProfileDropdown
+              id="nav-profile"
+              user={mockUser}
+              menuItems={profileMenuItems}
+            />
+          </div>
         }
       />
 

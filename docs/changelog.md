@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.1] - 2025-09-28
+
+### Added
+- **Enhanced Navigation Components**:
+  - `Logo` component with modern gradient icon and responsive text
+  - `NotificationBell` with dropdown, badge counter, and mock notifications
+  - `ProfileDropdown` with user avatar, role display, and menu items
+- **Advanced UI Features**:
+  - Notification system with unread badges and timestamps
+  - Profile management with avatar initials fallback
+  - Dropdown animations and outside-click handling
+  - Mobile-responsive navigation improvements
+- **Component Styling**:
+  - `/styles/components/logo.css` - Logo with gradient icon
+  - `/styles/components/notification-bell.css` - Notification dropdown with animations
+  - `/styles/components/profile-dropdown.css` - Profile menu with user info
+- **Enhanced User Experience**:
+  - Mock notification data with different types (info, warning, success, error)
+  - Admin-specific notifications and profile menu
+  - Proper accessibility with ARIA labels and keyboard support
+
 ## [0.1.0] - 2025-09-28
 
 ### Added

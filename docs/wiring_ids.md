@@ -10,7 +10,8 @@ This document maps every interactive UI element to its corresponding API endpoin
 | `nav-logo` | N/A | N/A | Logo link to homepage |
 | `nav-home` | N/A | N/A | Navigation to homepage |
 | `nav-admin` | N/A | N/A | Navigation to admin dashboard |
-| `nav-login-btn` | `/api/auth/login` (planned) | `users.email`, `users.password` | Login functionality |
+| `nav-notifications` | `/api/notifications` (planned) | `notifications.*` | Notification bell with dropdown |
+| `nav-profile` | `/api/auth/profile` (planned) | `users.*` | Profile dropdown menu |
 
 ### Homepage Actions
 | UI Element ID | API Endpoint | Database Field | Notes |
@@ -38,7 +39,9 @@ This document maps every interactive UI element to its corresponding API endpoin
 ### Navigation Elements
 | UI Element ID | API Endpoint | Database Field | Notes |
 |---------------|--------------|----------------|-------|
-| `nav-profile-btn` | `/api/auth/profile` (planned) | `users.*` | User profile functionality |
+| `nav-admin-logo` | N/A | N/A | Admin logo link |
+| `nav-admin-notifications` | `/api/notifications` (planned) | `notifications.*` | Admin notification bell |
+| `nav-admin-profile` | `/api/auth/profile` (planned) | `users.*` | Admin profile dropdown |
 
 ### Sidebar Navigation
 | UI Element ID | API Endpoint | Database Field | Notes |
@@ -81,6 +84,9 @@ This document maps every interactive UI element to its corresponding API endpoin
 ### Planned
 - `POST /api/auth/login` → User authentication
 - `GET /api/auth/profile` → User profile data
+- `GET /api/notifications` → User notifications
+- `PUT /api/notifications/:id/read` → Mark notification as read
+- `PUT /api/notifications/mark-all-read` → Mark all notifications as read
 - `POST /api/users` → Create new user
 - `PUT /api/users/:id` → Update user
 - `DELETE /api/users/:id` → Delete user
@@ -110,6 +116,16 @@ This document maps every interactive UI element to its corresponding API endpoin
 - `description`
 - `status` ('active' | 'inactive' | 'completed')
 - `owner_id` (Foreign Key → users.id)
+- `created_at`
+- `updated_at`
+
+### Notifications Table (Planned)
+- `id` (Primary Key)
+- `user_id` (Foreign Key → users.id)
+- `title`
+- `message`
+- `type` ('info' | 'warning' | 'success' | 'error')
+- `is_read` (Boolean)
 - `created_at`
 - `updated_at`
 

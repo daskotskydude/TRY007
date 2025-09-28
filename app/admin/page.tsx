@@ -2,6 +2,9 @@
 
 import React from 'react';
 import Navbar from '../../components/Navbar';
+import Logo from '../../components/Logo';
+import NotificationBell from '../../components/NotificationBell';
+import ProfileDropdown from '../../components/ProfileDropdown';
 import Sidebar from '../../components/Sidebar';
 import Button from '../../components/Button';
 import Card, { StatsCard } from '../../components/Card';
@@ -28,6 +31,77 @@ export default function AdminPage() {
     }
   ];
 
+  // Admin notifications (more system-focused)
+  const adminNotifications = [
+    {
+      id: 'admin-notif-1',
+      title: 'New User Registration',
+      message: 'john.doe@example.com has joined the platform',
+      time: new Date(Date.now() - 2 * 60000).toISOString(),
+      isRead: false,
+      type: 'info' as const
+    },
+    {
+      id: 'admin-notif-2',
+      title: 'System Alert',
+      message: 'Server CPU usage exceeded 80% threshold',
+      time: new Date(Date.now() - 15 * 60000).toISOString(),
+      isRead: false,
+      type: 'warning' as const
+    },
+    {
+      id: 'admin-notif-3',
+      title: 'Backup Completed',
+      message: 'Daily database backup completed successfully',
+      time: new Date(Date.now() - 60 * 60000).toISOString(),
+      isRead: true,
+      type: 'success' as const
+    }
+  ];
+
+  // Admin user profile
+  const adminUser = {
+    name: 'Admin User',
+    email: 'admin@example.com',
+    role: 'Administrator'
+  };
+
+  // Admin profile menu
+  const adminMenuItems = [
+    {
+      id: 'admin-profile',
+      label: 'Admin Profile',
+      icon: '👤',
+      onClick: () => addToast({ message: 'Admin profile feature is not available yet', variant: 'info' })
+    },
+    {
+      id: 'system-settings',
+      label: 'System Settings',
+      icon: '⚙️',
+      onClick: () => addToast({ message: 'System settings feature is not available yet', variant: 'info' })
+    },
+    {
+      id: 'user-management',
+      label: 'User Management',
+      icon: '👥',
+      onClick: () => addToast({ message: 'User management feature is not available yet', variant: 'info' })
+    },
+    {
+      id: 'audit-logs',
+      label: 'Audit Logs',
+      icon: '📋',
+      onClick: () => addToast({ message: 'Audit logs feature is not available yet', variant: 'info' })
+    },
+    {
+      id: 'admin-logout',
+      label: 'Sign Out',
+      icon: '🚪',
+      separator: true,
+      variant: 'danger' as const,
+      onClick: () => addToast({ message: 'Admin sign out feature is not available yet', variant: 'info' })
+    }
+  ];
+
   const handleSidebarClick = (item: any) => {
     addToast({
       title: 'Navigation',
@@ -44,13 +118,26 @@ export default function AdminPage() {
     });
   };
 
+  const handleAdminNotificationClick = (notification: any) => {
+    addToast({
+      title: 'Admin Notification',
+      message: `Opened: ${notification.title}`,
+      variant: 'info'
+    });
+  };
+
+  const handleAdminMarkAllRead = () => {
+    addToast({
+      message: 'All admin notifications marked as read',
+      variant: 'success'
+    });
+  };
+
   return (
     <div className="layout-main">
       <Navbar
         left={
-          <a href="/" className="navbar-logo" id="nav-logo">
-            TRY007 Admin
-          </a>
+          <Logo id="nav-admin-logo" href="/admin" />
         }
         center={
           <div className="navbar-tabs">
@@ -63,17 +150,19 @@ export default function AdminPage() {
           </div>
         }
         right={
-          <Button
-            id="nav-profile-btn"
-            variant="secondary"
-            size="sm"
-            onClick={() => addToast({
-              message: 'Profile feature is not available yet',
-              variant: 'info'
-            })}
-          >
-            Profile
-          </Button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)' }}>
+            <NotificationBell
+              id="nav-admin-notifications"
+              notifications={adminNotifications}
+              onNotificationClick={handleAdminNotificationClick}
+              onMarkAllRead={handleAdminMarkAllRead}
+            />
+            <ProfileDropdown
+              id="nav-admin-profile"
+              user={adminUser}
+              menuItems={adminMenuItems}
+            />
+          </div>
         }
       />
 
