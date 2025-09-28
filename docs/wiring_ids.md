@@ -8,31 +8,97 @@ This document maps every interactive UI element to its corresponding API endpoin
 | UI Element ID | API Endpoint | Database Field | Notes |
 |---------------|--------------|----------------|-------|
 | `nav-logo` | N/A | N/A | Logo link to homepage |
-| `nav-home` | N/A | N/A | Navigation to homepage |
 | `nav-admin` | N/A | N/A | Navigation to admin dashboard |
 | `nav-notifications` | `/api/notifications` (planned) | `notifications.*` | Notification bell with dropdown |
 | `nav-profile` | `/api/auth/profile` (planned) | `users.*` | Profile dropdown menu |
 
-### Homepage Actions
+### Tab System
 | UI Element ID | API Endpoint | Database Field | Notes |
 |---------------|--------------|----------------|-------|
-| `home-get-started-btn` | N/A | N/A | Shows toast - feature not available |
-| `home-learn-more-btn` | N/A | N/A | Shows toast - feature not available |
+| `main-tabs` | N/A | N/A | Main tab system container |
+| `tab-home` | `/api/dashboard/stats` (planned) | `dashboard_stats.*` | **Home tab (default)** with dashboard overview |
+| `tab-training` | `/api/training` (planned) | `training_courses.*` | Training tab |
+| `tab-routines` | `/api/routines` (planned) | `routines.*` | Routines tab |
+| `tab-recognitions` | `/api/recognitions` (planned) | `recognitions.*` | Recognitions tab |
+| `tab-resources` | `/api/resources` (planned) | `resources.*` | Resources tab |
 
-### Statistics Display
+### Home Tab Actions
 | UI Element ID | API Endpoint | Database Field | Notes |
 |---------------|--------------|----------------|-------|
-| `stats-users` | `/api/dashboard/stats` | `users.count` | Total active users |
-| `stats-projects` | `/api/dashboard/stats` | `projects.count` | Total projects |
-| `stats-tasks` | `/api/dashboard/stats` | `tasks.count` | Completed tasks |
-| `stats-uptime` | `/api/dashboard/stats` | `system.uptime` | System uptime percentage |
+| `btn-home-action-0` | `/api/training/schedule` (POST, planned) | `training_schedules.*` | Schedule new training sessions |
+| `btn-home-action-1` | `/api/dashboard/analytics` (planned) | `analytics_data.*` | View performance analytics |
+| `btn-home-action-2` | `/api/users/manage` (planned) | `users.*` | User administration panel |
+| `btn-home-action-3` | `/api/resources/library` (planned) | `resources.*` | Access training materials |
+| `btn-home-action-4` | `/api/system/settings` (planned) | `system_settings.*` | Configure application |
+| `btn-home-action-5` | `/api/recognitions/center` (planned) | `recognitions.*` | Award achievements center |
 
-### Feature Cards
+### Training Tab Actions
 | UI Element ID | API Endpoint | Database Field | Notes |
 |---------------|--------------|----------------|-------|
-| `feature-components` | N/A | N/A | Static feature description |
-| `feature-responsive` | N/A | N/A | Static feature description |
-| `feature-admin` | N/A | N/A | Static feature description |
+| `training-get-started-btn` | `/api/training/enroll` (planned) | `training_enrollments.*` | Start training program |
+| `training-browse-courses-btn` | `/api/training/courses` (planned) | `training_courses.*` | Browse course catalog |
+| `training-view-progress-btn` | `/api/training/progress` (planned) | `training_progress.*` | View learning progress |
+
+### Routines Tab Actions
+| UI Element ID | API Endpoint | Database Field | Notes |
+|---------------|--------------|----------------|-------|
+| `routines-create-btn` | `/api/routines` (POST, planned) | `routines.*` | Create new routine |
+| `routines-templates-btn` | `/api/routines/templates` (planned) | `routine_templates.*` | Browse routine templates |
+| `routines-schedule-btn` | `/api/routines/schedule` (planned) | `routine_schedules.*` | View routine schedule |
+
+### Recognitions Tab Actions
+| UI Element ID | API Endpoint | Database Field | Notes |
+|---------------|--------------|----------------|-------|
+| `recognition-nominate-btn` | `/api/recognitions` (POST, planned) | `recognitions.*` | Nominate someone |
+| `recognition-awards-btn` | `/api/recognitions/awards` (planned) | `awards.*` | View awards |
+| `recognition-achievements-btn` | `/api/recognitions/my-achievements` (planned) | `user_achievements.*` | View personal achievements |
+
+### Resources Tab Actions
+| UI Element ID | API Endpoint | Database Field | Notes |
+|---------------|--------------|----------------|-------|
+| `resources-browse-btn` | `/api/resources` (planned) | `resources.*` | Browse resource library |
+| `resources-upload-btn` | `/api/resources` (POST, planned) | `resources.*` | Upload new resource |
+| `resources-favorites-btn` | `/api/resources/favorites` (planned) | `user_favorites.*` | View favorite resources |
+
+### Feature Cards (Training Tab)
+| UI Element ID | API Endpoint | Database Field | Notes |
+|---------------|--------------|----------------|-------|
+| `training-courses` | `/api/training/courses` (planned) | `training_courses.*` | Course library feature |
+| `training-progress` | `/api/training/progress` (planned) | `training_progress.*` | Progress tracking feature |
+| `training-certificates` | `/api/training/certificates` (planned) | `certificates.*` | Certification feature |
+| `training-personalized` | `/api/training/recommendations` (planned) | `user_preferences.*` | Personalized learning |
+| `training-mobile` | N/A | N/A | Mobile learning feature |
+| `training-analytics` | `/api/training/analytics` (planned) | `training_analytics.*` | Learning analytics |
+
+### Feature Cards (Routines Tab)
+| UI Element ID | API Endpoint | Database Field | Notes |
+|---------------|--------------|----------------|-------|
+| `routines-automation` | `/api/routines/automation` (planned) | `automation_rules.*` | Smart automation feature |
+| `routines-templates` | `/api/routines/templates` (planned) | `routine_templates.*` | Routine templates |
+| `routines-scheduling` | `/api/routines/scheduling` (planned) | `routine_schedules.*` | Flexible scheduling |
+| `routines-monitoring` | `/api/routines/monitoring` (planned) | `routine_metrics.*` | Performance monitoring |
+| `routines-collaboration` | `/api/routines/sharing` (planned) | `routine_sharing.*` | Team collaboration |
+| `routines-integration` | `/api/routines/integrations` (planned) | `system_integrations.*` | System integration |
+
+### Feature Cards (Recognitions Tab)
+| UI Element ID | API Endpoint | Database Field | Notes |
+|---------------|--------------|----------------|-------|
+| `recognition-peer` | `/api/recognitions/peer` (planned) | `peer_recognitions.*` | Peer recognition |
+| `recognition-achievements` | `/api/recognitions/achievements` (planned) | `achievements.*` | Achievement tracking |
+| `recognition-leaderboards` | `/api/recognitions/leaderboards` (planned) | `leaderboards.*` | Recognition leaderboards |
+| `recognition-rewards` | `/api/recognitions/rewards` (planned) | `reward_systems.*` | Reward systems |
+| `recognition-analytics` | `/api/recognitions/analytics` (planned) | `recognition_analytics.*` | Recognition analytics |
+| `recognition-custom` | `/api/recognitions/custom` (planned) | `custom_awards.*` | Custom awards |
+
+### Feature Cards (Resources Tab)
+| UI Element ID | API Endpoint | Database Field | Notes |
+|---------------|--------------|----------------|-------|
+| `resources-library` | `/api/resources/library` (planned) | `resources.*` | Digital library |
+| `resources-search` | `/api/resources/search` (planned) | N/A | Smart search feature |
+| `resources-collaboration` | `/api/resources/collaboration` (planned) | `resource_comments.*` | Collaborative sharing |
+| `resources-templates` | `/api/resources/templates` (planned) | `resource_templates.*` | Template library |
+| `resources-mobile` | N/A | N/A | Mobile access feature |
+| `resources-analytics` | `/api/resources/analytics` (planned) | `resource_analytics.*` | Usage analytics |
 
 ## Admin Dashboard (`/admin`)
 

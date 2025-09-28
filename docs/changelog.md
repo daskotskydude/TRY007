@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2] - 2025-09-28
+
+### Added
+- **Lucide Icon Library**:
+  - Installed `lucide-react` for modern, consistent icons
+  - Replaced all emoji icons throughout the application
+  - Professional icon set for navigation, tabs, and content areas
+- **Home Dashboard Tab**:
+  - New `HomeLanding` component as default tab
+  - Dashboard overview with key metrics and statistics
+  - Quick actions panel with 6 action cards
+  - Stats grid showing user metrics and trends
+- **Tab System Navigation**:
+  - `TabSystem` component with animated tab switching and icon support
+  - Five main application tabs: Home, Training, Routines, Recognitions, Resources
+  - Tab content rendered in navbar below slot for consistent positioning
+  - Lucide icons for all tab buttons
+- **Landing Page Components**:
+  - `HomeLanding` - Dashboard overview with stats and quick actions
+  - `TrainingLanding` - Professional training programs and course catalog
+  - `RoutinesLanding` - Workflow automation and routine templates
+  - `RecognitionsLanding` - Employee recognition and awards system
+  - `ResourcesLanding` - Knowledge repository and resource library
+- **Enhanced Content Architecture**:
+  - Hero sections with gradient backgrounds for each tab
+  - Feature grids showcasing key capabilities
+  - Call-to-action sections with multiple action buttons
+  - Mobile-responsive landing page layouts
+- **Component Styling**:
+  - `/styles/components/tabs.css` - Tab system with animations and responsive design
+  - Professional landing page styles with consistent design tokens
+
 ## [0.1.1] - 2025-09-28
 
 ### Added
@@ -22,6 +54,12 @@ All notable changes to this project will be documented in this file.
   - Mock notification data with different types (info, warning, success, error)
   - Admin-specific notifications and profile menu
   - Proper accessibility with ARIA labels and keyboard support
+- **Icon System Enhancement**:
+  - Updated `NotificationBell` to use Lucide icons (Bell, Check, X, CheckCheck)
+  - Updated `ProfileDropdown` to use Lucide icons (User, ChevronDown)
+  - Enhanced landing page hero sections with corresponding Lucide icons
+  - Profile menu items now use consistent Lucide icons (User, Settings, HelpCircle, LogOut)
+  - Tab icons replaced: Home, GraduationCap, Settings, Award, BookOpen
 
 ## [0.1.0] - 2025-09-28
 
