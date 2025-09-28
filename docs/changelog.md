@@ -2,6 +2,43 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.3] - 2025-09-28
+
+### Added
+- **Udemy-like Learning Platform** (Training Tab):
+  - Complete course browsing system with search and filtering
+  - Course detail modals with curriculum preview
+  - Interactive course player with lesson navigation
+  - Course enrollment and progress tracking
+  - Professional course cards with pricing and ratings
+  - Responsive grid layout for course display
+- **Multi-Step Course Creator** (Admin Dashboard):
+  - 5-step course creation workflow
+  - Step 1: Course landing page setup (title, subtitle, description, category, level)
+  - Step 2: Curriculum builder with sections and lessons
+  - Step 3: Requirements, outcomes, and target audience
+  - Step 4: Pricing and promotional setup
+  - Step 5: Course preview and publishing
+  - Progress indicator with step validation
+  - Comprehensive form validation and user guidance
+- **Enhanced CSS Styling System**:
+  - New `training-platform.css` with complete Udemy-like styling
+  - Course creator styles in enhanced `create-admin.css`
+  - Professional course cards, player interface, progress bars
+  - Mobile-responsive design throughout
+
+### Enhanced
+- **CreateTraining Component**:
+  - Transformed from basic form to comprehensive multi-step course builder
+  - TypeScript interfaces for course data structure
+  - Dynamic curriculum building with sections and lessons
+  - Array input management for requirements and outcomes
+- **TrainingLanding Component**:
+  - Complete rewrite as Udemy-like course platform
+  - Course browsing, search, and enrollment functionality
+  - Interactive course player with lesson management
+  - Progress tracking and course completion system
+
 ## [0.1.2] - 2025-09-28
 
 ### Added

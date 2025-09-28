@@ -37,15 +37,36 @@ This document maps every interactive UI element to its corresponding API endpoin
 |---------------|--------------|----------------|-------|
 | `create-tabs` | N/A | N/A | Nested tab system container for content creation |
 
-#### Create Training Sub-Tab
+#### Create Training Sub-Tab - Multi-Step Course Creator
 | UI Element ID | API Endpoint | Database Field | Notes |
 |---------------|--------------|----------------|-------|
-| `btn-create-course` | `/api/training/courses` (POST, planned) | `training_courses.*` | Create new training course |
-| `btn-create-program` | `/api/training/programs` (POST, planned) | `training_programs.*` | Create training program |
-| `btn-import-content` | `/api/training/import` (POST, planned) | `training_content.*` | Import external training content |
-| `course-title` | N/A | `courses.title` | Course title input field |
-| `course-description` | N/A | `courses.description` | Course description textarea |
-| `btn-publish-course` | `/api/training/courses/publish` (POST, planned) | `training_courses.*` | Publish created course |
+
+**Step 1: Course Landing Page**
+| `course-title` | `/api/courses` (POST) | `courses.title` | Course title input |
+| `course-subtitle` | `/api/courses` (POST) | `courses.subtitle` | Course subtitle input |
+| `course-description` | `/api/courses` (POST) | `courses.description` | Course description textarea |
+| `course-category` | `/api/courses` (POST) | `courses.category_id` | Category selection dropdown |
+| `course-level` | `/api/courses` (POST) | `courses.level` | Difficulty level selection |
+
+**Step 2: Course Structure & Curriculum**
+| `curriculum-builder` | `/api/courses/{id}/curriculum` (POST) | `course_sections.*` | Curriculum builder interface |
+| `section-title-input` | `/api/courses/sections` (POST) | `course_sections.title` | Section title inputs |
+| `lesson-title-input` | `/api/courses/lessons` (POST) | `course_lessons.title` | Lesson title inputs |
+| `lesson-type-select` | `/api/courses/lessons` (POST) | `course_lessons.type` | Lesson type selection |
+| `lesson-duration-input` | `/api/courses/lessons` (POST) | `course_lessons.duration` | Lesson duration in minutes |
+
+**Step 3: Course Requirements & Outcomes**
+| `requirements-input` | `/api/courses` (POST) | `courses.requirements` | Prerequisites array |
+| `outcomes-input` | `/api/courses` (POST) | `courses.learning_outcomes` | Learning outcomes array |
+| `audience-input` | `/api/courses` (POST) | `courses.target_audience` | Target audience array |
+
+**Step 4: Pricing & Promotions**
+| `course-price` | `/api/courses` (POST) | `courses.price` | Course base price |
+| `promo-price` | `/api/courses` (POST) | `courses.promotional_price` | Promotional price |
+
+**Step 5: Course Preview & Publish**
+| `course-preview` | `/api/courses/{id}/preview` (GET) | Multiple tables | Preview assembled course data |
+| `btn-publish-course` | `/api/courses/{id}/publish` (POST) | `courses.status` | Publish course (set status to 'published') |
 
 #### Create Routines Sub-Tab
 | UI Element ID | API Endpoint | Database Field | Notes |
@@ -74,9 +95,47 @@ This document maps every interactive UI element to its corresponding API endpoin
 | `resource-title` | N/A | `resources.title` | Resource title input field |
 | `btn-publish-resource` | `/api/resources/publish` (POST, planned) | `resources.*` | Publish created resource |
 
-### Training Tab Actions
+## Training Tab - Udemy-like Learning Platform (`/training`)
+
+### Course Browsing & Search
 | UI Element ID | API Endpoint | Database Field | Notes |
 |---------------|--------------|----------------|-------|
+| `course-search` | `/api/courses/search` (GET) | `courses.*` | Search courses by title/description |
+| `category-filter` | `/api/courses?category={id}` (GET) | `courses.category_id` | Filter courses by category |
+| `level-filter` | `/api/courses?level={level}` (GET) | `courses.level` | Filter by difficulty level |
+| `course-card-{id}` | `/api/courses/{id}` (GET) | `courses.*` | Individual course card display |
+| `btn-course-details-{id}` | N/A | N/A | View course details modal |
+
+### Course Detail & Enrollment
+| UI Element ID | API Endpoint | Database Field | Notes |
+|---------------|--------------|----------------|-------|
+| `course-detail-modal` | `/api/courses/{id}/details` (GET) | `courses.*`, `course_sections.*` | Course information modal |
+| `btn-enroll-{id}` | `/api/enrollments` (POST) | `enrollments.*` | Enroll in course |
+| `btn-start-learning-{id}` | N/A | N/A | Start course (enrolled users) |
+| `course-curriculum-preview` | `/api/courses/{id}/curriculum` (GET) | `course_sections.*`, `course_lessons.*` | Preview curriculum structure |
+| `course-requirements-list` | N/A | `courses.requirements` | Display course prerequisites |
+| `course-outcomes-list` | N/A | `courses.learning_outcomes` | Display learning outcomes |
+
+### Interactive Course Player
+| UI Element ID | API Endpoint | Database Field | Notes |
+|---------------|--------------|----------------|-------|
+| `course-player` | `/api/courses/{id}/player` (GET) | `courses.*`, `user_progress.*` | Course player interface |
+| `lesson-navigation` | N/A | N/A | Navigate between lessons |
+| `btn-prev-lesson` | `/api/progress/lesson/prev` (POST) | `user_progress.current_lesson` | Previous lesson navigation |
+| `btn-next-lesson` | `/api/progress/lesson/next` (POST) | `user_progress.current_lesson` | Next lesson navigation |
+| `btn-complete-lesson` | `/api/progress/lesson/complete` (POST) | `user_progress.completed_lessons` | Mark lesson as complete |
+| `progress-bar` | `/api/courses/{id}/progress` (GET) | `user_progress.*` | Course completion progress |
+| `btn-exit-course` | N/A | N/A | Exit course player |
+
+### Course Progress & Tracking
+| UI Element ID | API Endpoint | Database Field | Notes |
+|---------------|--------------|----------------|-------|
+| `my-courses-section` | `/api/users/enrollments` (GET) | `enrollments.*` | User's enrolled courses |
+| `progress-card-{id}` | `/api/courses/{id}/progress` (GET) | `user_progress.*` | Individual course progress |
+| `btn-continue-course-{id}` | N/A | N/A | Continue from last lesson |
+| `completion-badge` | N/A | `user_progress.completed_at` | Course completion indicator |
+
+### Training Tab Actions (Legacy - to be updated)
 | `training-get-started-btn` | `/api/training/enroll` (planned) | `training_enrollments.*` | Start training program |
 | `training-browse-courses-btn` | `/api/training/courses` (planned) | `training_courses.*` | Browse course catalog |
 | `training-view-progress-btn` | `/api/training/progress` (planned) | `training_progress.*` | View learning progress |
