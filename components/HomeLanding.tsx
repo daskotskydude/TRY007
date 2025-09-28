@@ -3,7 +3,6 @@
 import React from 'react';
 import Card from './Card';
 import Button from './Button';
-import Toast from './Toast';
 import { Home, BarChart3, Users, TrendingUp, Calendar, Award, BookOpen, Settings } from 'lucide-react';
 
 interface HomeLandingProps {
